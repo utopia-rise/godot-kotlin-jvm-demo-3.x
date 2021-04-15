@@ -8,15 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Player",
+"language": "Kotlin",
+"path": "res://src/main/kotlin/Player.kt"
+} ]
 _global_script_class_icons={
-
+"Player": ""
 }
 
 [application]
 
 config/name="Platformer 3D"
-run/main_scene="res://stage.scn"
+run/main_scene="res://scenes/stage.scn"
 config/icon="res://icon.png"
 
 [debug]

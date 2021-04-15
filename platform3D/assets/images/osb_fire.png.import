@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/osb_down.png-4a1ab934f787719766862b499528d054.stex"
+path="res://.import/osb_fire.png-fd9a52c21f001f13d93a26b28efd181a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://osb_down.png"
-dest_files=[ "res://.import/osb_down.png-4a1ab934f787719766862b499528d054.stex" ]
+source_file="res://assets/images/osb_fire.png"
+dest_files=[ "res://.import/osb_fire.png-fd9a52c21f001f13d93a26b28efd181a.stex" ]
 
 [params]
 

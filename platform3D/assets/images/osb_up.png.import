@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cutout.png-8aacc6c936bf12e889c8e11f6c4eb91c.stex"
+path="res://.import/osb_up.png-fa8700e1dc57deb32b2dc991ce3c4c46.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cutout.png"
-dest_files=[ "res://.import/cutout.png-8aacc6c936bf12e889c8e11f6c4eb91c.stex" ]
+source_file="res://assets/images/osb_up.png"
+dest_files=[ "res://.import/osb_up.png-fa8700e1dc57deb32b2dc991ce3c4c46.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panorama.png-e05131d3dca9fd5b03101f18fbe08995.stex"
+path="res://.import/cutout.png-d24c73908f6bc1c1603fe37ab09e0b20.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://panorama.png"
-dest_files=[ "res://.import/panorama.png-e05131d3dca9fd5b03101f18fbe08995.stex" ]
+source_file="res://assets/images/cutout.png"
+dest_files=[ "res://.import/cutout.png-d24c73908f6bc1c1603fe37ab09e0b20.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
-process/premult_alpha=false
+process/premult_alpha=true
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/osb_jump.png-dbbef3b47abbb562ce6c81a9701121c6.stex"
+path="res://.import/panorama.png-6475328b64bec7c78c6b9f3afb7d5d4d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://osb_jump.png"
-dest_files=[ "res://.import/osb_jump.png-dbbef3b47abbb562ce6c81a9701121c6.stex" ]
+source_file="res://assets/images/panorama.png"
+dest_files=[ "res://.import/panorama.png-6475328b64bec7c78c6b9f3afb7d5d4d.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
-process/premult_alpha=true
+process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
