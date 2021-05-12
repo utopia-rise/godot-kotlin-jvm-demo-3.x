@@ -4,6 +4,7 @@ import godot.annotation.RegisterFunction
 import godot.core.Basis
 import godot.core.Transform
 import godot.core.Vector3
+import godot.extensions.getNodeAs
 
 @RegisterClass
 class Enemy : RigidBody() {
@@ -17,23 +18,23 @@ class Enemy : RigidBody() {
 	private var dying = false
 
 	private val floorRayCast by lazy {
-		getNode<RayCast>("Armature/ray_floor")
+		getNodeAs<RayCast>("Armature/ray_floor")!!
 	}
 
 	private val wallRayCast by lazy {
-		getNode<RayCast>("Armature/ray_wall")
+		getNodeAs<RayCast>("Armature/ray_wall")!!
 	}
 
 	private val armature by lazy {
-		getNode<Spatial>("Armature")
+		getNodeAs<Spatial>("Armature")!!
 	}
 
 	private val animationPlayer by lazy {
-		getNode<AnimationPlayer>("AnimationPlayer")
+		getNodeAs<AnimationPlayer>("AnimationPlayer")!!
 	}
 
 	private val soundHitPlayer by lazy {
-		getNode<AudioStreamPlayer3D>("sound_hit")
+		getNodeAs<AudioStreamPlayer3D>("sound_hit")!!
 	}
 
 	@RegisterFunction

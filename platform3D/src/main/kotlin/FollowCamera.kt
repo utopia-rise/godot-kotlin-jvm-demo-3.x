@@ -30,26 +30,26 @@ class FollowCamera : Camera() {
     private val minHeight = 0.0
 
     @RegisterFunction
-    override fun _physicsProcess(dt: Double) {
+    override fun _physicsProcess(delta: Double) {
         val target = (getParent() as Spatial).globalTransform.origin
         var pos = globalTransform.origin
         val up = Vector3(0f, 1f, 0f)
 
-        var delta = pos - target
+        var diff = pos - target
 
         // check ranges
-        if (delta.length() < minDistance) {
-            delta = delta.normalized() * minDistance
-        } else if (delta.length() > maxDistance) {
-            delta = delta.normalized() * maxDistance
+        if (diff.length() < minDistance) {
+            diff = diff.normalized() * minDistance
+        } else if (diff.length() > maxDistance) {
+            diff = diff.normalized() * maxDistance
         }
 
         // check upper and lower height
-        if (delta.y > maxHeight) {
-            delta.y = maxHeight
+        if (diff.y > maxHeight) {
+            diff.y = maxHeight
         }
-        if (delta.y < minHeight) {
-            delta.y = minHeight
+        if (diff.y < minHeight) {
+            diff.y = minHeight
         }
 
         // Check autoturn
@@ -57,35 +57,35 @@ class FollowCamera : Camera() {
 
         val colLeft = ds.intersectRay(
             target,
-            target + Basis(up, GD.deg2rad(autoturnRayAperture.toDouble())).xform(delta),
+            target + Basis(up, GD.deg2rad(autoturnRayAperture.toDouble())).xform(diff),
             collisionExceptions
         )
-        val col = ds.intersectRay(target, target + delta, collisionExceptions)
+        val col = ds.intersectRay(target, target + diff, collisionExceptions)
         val colRight = ds.intersectRay(
             target,
-            target + Basis(up, GD.deg2rad((-autoturnRayAperture).toDouble())).xform(delta),
+            target + Basis(up, GD.deg2rad((-autoturnRayAperture).toDouble())).xform(diff),
             collisionExceptions
         )
 
         if (!col.empty()) {
             // If main ray was occluded, get camera closer, this is the worst case scenario
-            delta = (col["position"] as Vector3) - target
+            diff = (col["position"] as Vector3) - target
         } else if (!colLeft.empty() && colRight.empty()) {
             // If only left ray is occluded, turn the camera around to the right
-            delta = Basis(up, GD.deg2rad(-dt * autoturnSpeed)).xform(delta)
+            diff = Basis(up, GD.deg2rad(-delta * autoturnSpeed)).xform(diff)
         } else if (colLeft.empty() && !colRight.empty()) {
             // If only right ray is occluded, turn the camera around to the left
-            delta = Basis(up, GD.deg2rad(dt * autoturnSpeed)).xform(delta)
+            diff = Basis(up, GD.deg2rad(delta * autoturnSpeed)).xform(diff)
         } else {
             // Do nothing otherwise, left and right are occluded but center is not, so do not autoturn
         }
 
         // Apply lookat
-        if (delta == Vector3()) {
-            delta = (pos - target).normalized() * 0.0001f
+        if (diff == Vector3()) {
+            diff = (pos - target).normalized() * 0.0001f
         }
 
-        pos = target + delta
+        pos = target + diff
 
         lookAtFromPosition(pos, target, up)
 

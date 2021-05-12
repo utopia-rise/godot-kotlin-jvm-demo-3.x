@@ -4,6 +4,7 @@ import godot.annotation.RegisterFunction
 import godot.core.Basis
 import godot.core.Transform
 import godot.core.Vector3
+import godot.extensions.getNodeAs
 import godot.global.GD
 import kotlin.math.*
 
@@ -46,7 +47,7 @@ class Player : KinematicBody() {
 
 		// direction where the player intends to walk
 		var dir = Vector3()
-		val camXform = getNode<Spatial>("target/camera").globalTransform
+		val camXform = getNodeAs<Spatial>("target/camera")!!.globalTransform
 
 		if (Input.isActionPressed("move_forward")) {
 			dir += -camXform.basis[2]
@@ -88,7 +89,7 @@ class Player : KinematicBody() {
 
 			hv = hdir * hspeed
 
-			val meshXform = getNode<Spatial>("Armature").transform
+			val meshXform = getNodeAs<Spatial>("Armature")!!.transform
 			var facingMesh = -meshXform.basis[0].normalized()
 			facingMesh = (facingMesh - up * facingMesh.dot(up)).normalized()
 			if (hspeed > 0f) {
@@ -96,12 +97,12 @@ class Player : KinematicBody() {
 			}
 			val m3 = Basis(-facingMesh, up, -facingMesh.cross(up).normalized()).scaled(CHAR_SCALE)
 
-			getNode<Spatial>("Armature").transform = Transform(Transform(m3, meshXform.origin))
+			getNodeAs<Spatial>("Armature")!!.transform = Transform(Transform(m3, meshXform.origin))
 
 			if (!jumping and jumpAttempt) {
 				vv = 7.0
 				jumping = true
-				getNode<AudioStreamPlayer3D>("sound_jump").play()
+				getNodeAs<AudioStreamPlayer3D>("sound_jump")!!.play()
 			}
 		} else {
 			if (vv > 0f) {
@@ -148,17 +149,17 @@ class Player : KinematicBody() {
 			shootBlend = SHOOT_TIME
 			val bullet = (GD.load<PackedScene>("res://scenes/bullet.scn") as PackedScene)
 				.instance() as Bullet
-			val bulletGlobalTransform = getNode<Spatial>("Armature/bullet").globalTransform
+			val bulletGlobalTransform = getNodeAs<Spatial>("Armature/bullet")!!.globalTransform
 			bullet.transform = bulletGlobalTransform.orthonormalized()
 			getParent()?.addChild(bullet)
 			bullet.linearVelocity = bulletGlobalTransform.basis[2].normalized() * 20f
 			bullet.addCollisionExceptionWith(this)
-			getNode<AudioStreamPlayer3D>("sound_shoot").play()
+			getNodeAs<AudioStreamPlayer3D>("sound_shoot")!!.play()
 		}
 
 		prevShoot = shootAttempt
 
-		val animationTreePlayer = getNode<AnimationTreePlayer>("AnimationTreePlayer")
+		val animationTreePlayer = getNodeAs<AnimationTreePlayer>("AnimationTreePlayer")!!
 		if (isOnFloor()) {
 			animationTreePlayer.blend2NodeSetAmount("walk", hspeed / maxSpeed)
 		}
@@ -169,7 +170,7 @@ class Player : KinematicBody() {
 
 	@RegisterFunction
 	override fun _ready() {
-		getNode<AnimationTreePlayer>("AnimationTreePlayer").active = true
+		getNodeAs<AnimationTreePlayer>("AnimationTreePlayer")!!.active = true
 	}
 
 	private fun adjustFacing(
